@@ -1,0 +1,75 @@
+{
+	"title": "Demostración de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/EPSAndesLogo.png",
+	"menuBar":
+	[
+		
+		{ "menuTitle": "RF1-5",
+		  "options":
+			[
+				{
+					"label": "registrar Roles Usuario ",
+					"event": "registrarRolesUsuario"
+				},
+				{
+					"label": "Registrar Usuario",
+					"event": "registrarUsuarioDemo"
+				},
+				{
+					"label": "Registrar EPS",
+					"event": "registrarEPS"
+				},
+				{
+					"label": "Registrar Medico",
+					"event": "registrarMedico"
+				},
+				{
+					"label": "Registrar Afiliado",
+					"event": "registrarAfiliado"
+				}
+
+			]
+		},
+		{ "menuTitle": "RF6-11",
+		  "options":
+			[
+				{
+					"label": "Registrar servicios prestado por IPS",
+					"event": "registrarServicioIPS"
+				},
+				{
+					"label": "Registrar Cita del afiliado  ",
+					"event": "registrarCitaAfiliado"
+				},
+				{
+					"label": "Reservar Servicio por parte del Afiliado",
+					"event": "realizarReserva"
+				},
+				{
+					"label": "Regstrar Servicio prestado IPS",
+					"event": "registrarServicioprestado"
+				},
+				{
+					"label": "Registrar Campaña",
+					"event": "registrarCampaña"
+				},
+				{
+					"label": "Cancelar sercios de campaña",
+					"event": "cancelarServiciosCampaña"
+				}
+			]
+		},
+		{ "menuTitle": "BONO",
+		  "options":
+			[
+				{
+					"label": "RF-8",
+					"event": "demoBar"
+				}
+			]
+		}				
+	]
+}
+	

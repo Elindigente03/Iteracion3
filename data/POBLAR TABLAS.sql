@@ -1,0 +1,177 @@
+
+-- POBLAR TABLA USUARIO
+INSERT INTO `USUARIO` (`ID`,`MIAL`,`NOMBRE`,`NUMERODOCUMENTO`,`TIPODOCUMENTO`,`ROL`)
+ VALUES (1,"ut.erat@dui.edu","Harmon","1669060988099","CEDULA DE CIUDADANIA ","'RECEPCIONISTA "),
+ (2,"amet@duiinsodales.co.uk","Pacheco","1663111210899"," CEDULA DE EXTRANGERIA ","AFILIADO"),
+ (3,"ridiculus.mus.Donec@diamatpretium.co.uk","Bolton","1685122206899","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (4,"magna.Duis.dignissim@urna.net","Lester","1692051791899"," TARJETA DE IDENTIDAD ","DOCTOR"),
+ (5,"enim.nisl@tempus.co.uk","Sparks","1658082504599"," CEDULA DE EXTRANGERIA ","AFILIADO"),
+ (6,"facilisi.Sed@inaliquetlobortis.com","Mueller","1680113004999"," PASAPORTE ","GERENTE"),
+ (7,"erat@egestasDuisac.com","Battle","1613052927399"," PASAPORTE ","'RECEPCIONISTA "),
+ (8,"ipsum@ipsumSuspendisse.net","Hendrix","1663032796599"," CEDULA DE EXTRANGERIA ","'RECEPCIONISTA "),
+ (9,"turpis@libero.net","Shepard","1651021753599"," CEDULA DE EXTRANGERIA ","AFILIADO"),
+ (10,"Nunc@euismodmauris.co.uk","Bryan","1607091620799","CEDULA DE CIUDADANIA ","'RECEPCIONISTA "),
+ (11,"tellus.Phasellus.elit@nisi.ca","Mosley","1697091875699"," TARJETA DE IDENTIDAD ","AFILIADO"),
+ (12,"nonummy.Fusce@ligulaAenean.net","Wells","1691091639299"," PASAPORTE ","DOCTOR"),
+ (13,"augue.Sed@pedeNuncsed.com","Sykes","1650062549599"," PASAPORTE ","DOCTOR"),
+ (14,"primis.in@orcisem.edu","Duncan","1608111948299","CEDULA DE CIUDADANIA ","GERENTE"),
+ (15,"fames@afeugiat.ca","Camacho","1687090202299","CEDULA DE CIUDADANIA ","'RECEPCIONISTA "),
+ (16,"pede.ultrices.a@Ut.co.uk","Joseph","1671120246599"," PASAPORTE ","'RECEPCIONISTA "),
+ (17,"Quisque@Pellentesque.ca","Gay","1671082739899"," PASAPORTE ","AFILIADO"),
+ (18,"orci.consectetuer@imperdietnonvestibulum.edu","Leblanc","1644070232899"," CEDULA DE EXTRANGERIA ","AFILIADO"),
+ (19,"sit@pedeblandit.ca","Greene","1649040905399","CEDULA DE CIUDADANIA ","GERENTE"),
+ (20,"mattis.Cras@justoPraesentluctus.co.uk","Kerr","1681030938099"," PASAPORTE ","'RECEPCIONISTA "),
+ (21,"nunc.ac@euligula.co.uk","Rodgers","1692081202199"," PASAPORTE ","DOCTOR"),
+ (22,"erat@Etiamvestibulum.edu","Gibson","1689070773999"," CEDULA DE EXTRANGERIA ","GERENTE"),
+ (23,"dis.parturient.montes@a.net","Pierce","1670121938399"," PASAPORTE ","GERENTE"),
+ (24,"eget.massa.Suspendisse@congueIn.net","Sims","1683082510699"," CEDULA DE EXTRANGERIA ","GERENTE"),
+ (25,"Curae.Donec@Donec.co.uk","Mcdowell","1625082421299"," PASAPORTE ","AFILIADO"),
+ (26,"accumsan.convallis.ante@inconsectetuer.net","Frost","1669090460699","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (27,"dapibus.rutrum@enimnon.edu","Benson","1615083091699"," PASAPORTE ","DOCTOR"),
+ (28,"tortor@Etiamlaoreetlibero.com","Medina","1604103016599"," PASAPORTE ","AFILIADO"),
+ (29,"orci@eunulla.edu","Whitaker","1648120881699"," CEDULA DE EXTRANGERIA ","GERENTE"),
+ (30,"ad.litora.torquent@eratinconsectetuer.co.uk","Stokes","1653051639999","CEDULA DE CIUDADANIA ","'RECEPCIONISTA "),
+ (31,"nulla.Integer.vulputate@Nullasemper.net","Moreno","1606092280499"," PASAPORTE ","GERENTE"),
+ (32,"Maecenas.iaculis@hendreritidante.edu","Ramos","1699121188399","CEDULA DE CIUDADANIA ","GERENTE"),
+ (33,"Aenean@semmollisdui.net","Brooks","1659081545099"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (34,"penatibus.et.magnis@maurisIntegersem.ca","Roberts","1604081479099"," TARJETA DE IDENTIDAD ","DOCTOR"),
+ (35,"velit@amalesuada.org","Crane","1620071460199","CEDULA DE CIUDADANIA ","AFILIADO"),
+ (36,"nec@convallisligula.net","Owens","1690020513899"," PASAPORTE ","DOCTOR"),
+ (37,"sit.amet@acfacilisisfacilisis.com","Reese","1670051805599","CEDULA DE CIUDADANIA ","GERENTE"),
+ (38,"ultrices@amet.net","Yang","1688042435899"," PASAPORTE ","GERENTE"),
+ (39,"aliquet@utipsumac.net","Wiggins","1616040517599","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (40,"ante.dictum@et.com","Byrd","1692071385299","CEDULA DE CIUDADANIA ","GERENTE"),
+ (41,"lorem.semper.auctor@ametnullaDonec.org","Pierce","1672071449099","CEDULA DE CIUDADANIA ","GERENTE"),
+ (42,"venenatis.vel@vulputateveliteu.ca","Frank","1651011354699"," PASAPORTE ","'RECEPCIONISTA "),
+ (43,"Vivamus@nunc.com","Ingram","1618011436599"," CEDULA DE EXTRANGERIA ","'RECEPCIONISTA "),
+ (44,"dis.parturient@aliquetlobortisnisi.org","Petty","1698081857799","CEDULA DE CIUDADANIA ","'RECEPCIONISTA "),
+ (45,"ut.lacus.Nulla@SuspendisseduiFusce.net","Sharp","1601070130399"," TARJETA DE IDENTIDAD ","DOCTOR"),
+ (46,"a.purus.Duis@acfermentumvel.com","Richards","1658030332299"," TARJETA DE IDENTIDAD ","GERENTE"),
+ (47,"faucibus.lectus.a@tristiquepellentesquetellus.ca","Merrill","1659092452199"," CEDULA DE EXTRANGERIA ","'RECEPCIONISTA "),
+ (48,"Integer.mollis.Integer@laoreetlibero.edu","Peters","1625030930899","CEDULA DE CIUDADANIA ","AFILIADO"),
+ (49,"Fusce.dolor.quam@elitpellentesquea.org","Morrow","1606010583399","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (50,"eu.accumsan@nonummyultriciesornare.org","Mendoza","1625060238599","CEDULA DE CIUDADANIA ","GERENTE"),
+ (51,"sociis.natoque@nuncullamcorpereu.net","Simon","1675081054699","CEDULA DE CIUDADANIA ","GERENTE"),
+ (52,"Mauris.eu.turpis@enimcondimentum.ca","Lester","1600060303999"," PASAPORTE ","DOCTOR"),
+ (53,"interdum.libero@elementumloremut.org","Bean","1657101461999"," TARJETA DE IDENTIDAD ","GERENTE"),
+ (54,"quam.dignissim@Phasellus.org","Melendez","1612040306699"," PASAPORTE ","'RECEPCIONISTA "),
+ (55,"dolor@Vivamusrhoncus.co.uk","Mayo","1603031932799","CEDULA DE CIUDADANIA ","AFILIADO"),
+ (56,"interdum.enim@sed.ca","Glass","1696080558299","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (57,"Nunc@dictum.edu","Livingston","1678062082799","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (58,"turpis.Aliquam.adipiscing@magnamalesuadavel.co.uk","English","1613102801399"," TARJETA DE IDENTIDAD ","DOCTOR"),
+ (59,"aliquet.nec@consequatauctornunc.co.uk","Le","1667101312099","CEDULA DE CIUDADANIA ","GERENTE"),
+ (60,"malesuada.id@lobortisquam.com","Mcguire","1640081454099"," CEDULA DE EXTRANGERIA ","GERENTE"),
+ (61,"ipsum.dolor.sit@ipsumleo.net","Prince","1663010177899"," CEDULA DE EXTRANGERIA ","AFILIADO"),
+ (62,"netus.et.malesuada@ultriciesdignissim.edu","Cook","1640021895299"," CEDULA DE EXTRANGERIA ","DOCTOR"),
+ (63,"aliquet@augue.co.uk","Hodge","1601112111599"," CEDULA DE EXTRANGERIA ","'RECEPCIONISTA "),
+ (64,"eget@dolordolor.ca","Webb","1682042526099"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (65,"id.risus.quis@sitamet.edu","Anderson","1621061799499"," PASAPORTE ","DOCTOR"),
+ (66,"adipiscing.lacus.Ut@adipiscingelit.com","Barlow","1699040729999","CEDULA DE CIUDADANIA ","GERENTE"),
+ (67,"non@sapienNunc.co.uk","Harding","1674060108099","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (68,"nec@orci.ca","Osborn","1679052842799"," CEDULA DE EXTRANGERIA ","'RECEPCIONISTA "),
+ (69,"ipsum.dolor.sit@sociosqu.ca","Barrett","1651090706099"," TARJETA DE IDENTIDAD ","GERENTE"),
+ (70,"vitae@penatibuset.co.uk","Larson","1614041074899"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (71,"tristique.neque@Morbiquisurna.org","Wall","1697112582799"," CEDULA DE EXTRANGERIA ","DOCTOR"),
+ (72,"sit.amet@ipsum.net","Hutchinson","1688090760199","CEDULA DE CIUDADANIA ","'RECEPCIONISTA "),
+ (73,"ante.iaculis@Pellentesqueultriciesdignissim.org","Hess","1646032675999","CEDULA DE CIUDADANIA ","DOCTOR"),
+ (74,"nunc@sedfacilisisvitae.edu","Elliott","1642041967899"," PASAPORTE ","GERENTE"),
+ (75,"ultrices@nisi.co.uk","Whitney","1673010978499","CEDULA DE CIUDADANIA ","GERENTE"),
+ (76,"eget.ipsum@aliquet.com","Cochran","1604012063299"," CEDULA DE EXTRANGERIA ","DOCTOR"),
+ (77,"velit.Sed.malesuada@nuncsitamet.org","Donaldson","1643051986699","CEDULA DE CIUDADANIA ","AFILIADO"),
+ (78,"iaculis.aliquet@utodio.net","Wilder","1607011190099"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (79,"Donec.vitae@erat.net","Witt","1683051668299"," CEDULA DE EXTRANGERIA ","GERENTE"),
+ (80,"nunc.interdum.feugiat@Phasellusnulla.ca","Douglas","1681041466299"," PASAPORTE ","AFILIADO"),
+ (81,"vulputate.risus@lacusvestibulumlorem.org","Bradshaw","1669032406399","CEDULA DE CIUDADANIA ","AFILIADO"),
+ (82,"risus@ornare.ca","Rose","1623060112699"," PASAPORTE ","'RECEPCIONISTA "),
+ (83,"ad@elit.com","Norton","1617110690799","CEDULA DE CIUDADANIA ","AFILIADO"),
+ (84,"Etiam.ligula.tortor@tinciduntvehicularisus.net","Hughes","1652092006899"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (85,"mattis.semper.dui@viverra.net","Luna","1652080843999"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (86,"sodales.Mauris@pedeet.ca","Nash","1633112652699"," PASAPORTE ","AFILIADO"),
+ (87,"ligula.Aliquam.erat@NullaaliquetProin.net","Guzman","1655112901599"," CEDULA DE EXTRANGERIA ","GERENTE"),
+ (88,"ridiculus.mus@sempertellusid.ca","Farrell","1615041586399","CEDULA DE CIUDADANIA ","GERENTE"),
+ (89,"in.dolor@mattisornare.org","Robertson","1612091876499"," TARJETA DE IDENTIDAD ","GERENTE"),
+ (90,"egestas.nunc.sed@Cras.org","Keith","1695040544099"," PASAPORTE ","GERENTE"),
+ (91,"tempor.augue.ac@natoquepenatibus.edu","Chaney","1626060822499"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (92,"justo.nec@pedesagittisaugue.ca","Sloan","1656032694499"," PASAPORTE ","DOCTOR"),
+ (93,"sapien@nuncQuisqueornare.ca","Mcneil","1633100778499"," PASAPORTE ","GERENTE"),
+ (94,"mauris@Phasellusat.net","Schroeder","1629011257599"," TARJETA DE IDENTIDAD ","'RECEPCIONISTA "),
+ (95,"at.sem.molestie@eleifendegestasSed.net","Ellis","1609070618599"," PASAPORTE ","AFILIADO"),
+ (96,"eu.nulla.at@Maecenas.co.uk","Pugh","1648070209899"," PASAPORTE ","DOCTOR"),
+ (97,"Ut.tincidunt.orci@elit.org","Gregory","1659041668699"," PASAPORTE ","'RECEPCIONISTA "),
+ (98,"ac.turpis@sollicitudin.ca","Woodard","1649042584999"," TARJETA DE IDENTIDAD ","DOCTOR"),
+ (99,"malesuada@Duisat.net","Ayala","1690012623299","CEDULA DE CIUDADANIA ","GERENTE"),
+(100,"scelerisque@inaliquetlobortis.com","Strickland","1691042415699"," PASAPORTE ","AFILIADO");
+
+-- POBLAR TABLA GERENTE
+INSERT INTO `GERENTE` (`ID`,`IDSERVICIO`)
+ VALUES (1,76),
+ (2,97),
+ (3,31),
+ (4,89),
+ (5,79),
+ (6,89),
+ (7,26),
+ (8,83),
+ (9,36),
+ (10,90);
+
+--POBLAR TABLA EPS
+INSERT INTO `EPS` (`ID`,`NOMBRE`,`IDGERENTE`)
+ VALUES (1,"litora torquent per conubia nostra, per inceptos",3),
+ (2,"eu odio tristique pharetra.",1),
+ (3,"vulputate, nisi sem semper erat, in consectetuer ipsum nunc id",3),
+ (4,"purus ac tellus. Suspendisse sed dolor. Fusce mi lorem,",1),
+ (5,"et, rutrum eu, ultrices sit amet,",4),
+ (6,"nec mauris blandit mattis. Cras eget nisi dictum augue malesuada",1),
+ (7,"augue",7),(8,"ut, nulla. Cras eu tellus eu",5),
+ (9,"ultricies ornare, elit elit fermentum risus, at fringilla purus",7),
+ (10,"lectus rutrum urna, nec luctus felis purus ac tellus.",2);
+
+ --POBLAR TABLA IPS
+ INSERT INTO `myTable` (`ID`,`IDEPS`,`LOCAZACION`,`NOMBRE`) 
+ VALUES (1,1,"felis. Nulla tempor","orci lobortis augue scelerisque mollis. Phasellus libero mauris,"),
+ (2,10,"mauris ipsum porta","dolor dapibus gravida. Aliquam tincidunt, nunc"),
+ (3,7,"ut, molestie in,","nulla magna, malesuada vel, convallis in, cursus"),
+ (4,8,"Proin vel arcu","sed pede nec ante blandit viverra. Donec tempus,"),
+ (5,7,"mi lorem, vehicula","pharetra, felis eget"),
+ (6,2,"eu sem. Pellentesque","nec ante"),
+ (7,2,"nec, imperdiet nec,","arcu. Vivamus sit amet"),
+ (8,6,"tempus scelerisque, lorem","malesuada fames"),
+ (9,1,"elit sed consequat","dolor. Donec"),
+ (10,7,"volutpat ornare, facilisis","volutpat nunc sit amet");
+
+
+--POBLAR TABLA ADMINISTRADOR
+INSERT INTO `myTable` (`ID`,`IDUSUARIO`,`IDEPS`)
+ VALUES (1,43,5),
+ (2,87,5),
+ (3,95,1),
+ (4,35,4),
+ (5,94,6),
+ (6,67,2),
+ (7,69,4),
+ (8,51,8),
+ (9,83,4),
+ (10,40,1);
+
+--POBLAR TABLAS MEDICO
+INSERT INTO `MEDICO` (`ID`,`ESPECIALIDAD`,`IDUSUARIO`,`IDUSUARIO`) 
+VALUES (1,"RAYOS X","Hilel",4),
+(2,"OPTOMETRIA","Emi",5),
+(3,"PEDIATRIA","Julian",3),
+(4,"OPTOMETRIA","Amery",6),
+(5,"OPTOMETRIA","Lester",10),
+(6,"LABORATORIO CLINICO","Sara",1),
+(7,"PEDIATRIA","Gemma",7),
+(8,"LABORATORIO CLINICO","Gillian",8),
+(9,"GINECOLOGIA","Uma",5),
+(10,"RAYOS X","Jena",10);
+
+
+--POBLAR TABLAS SRVICIO
+
+
+
+
+
+PEDIATRIA|GINECOLOGIA|OPTOMETRIA|ODONTOLOGIA|LABORATORIO CLINICO|RAYOS X
