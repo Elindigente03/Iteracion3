@@ -116,6 +116,7 @@ public class PersistenciaEPSAndes {
 	private SQLUsuario sqlUsuario;
 	private SQLCampaña sqlCampaña;
 	private SQLOrganizadorCampaña sqlOrganizadorCampaña;
+	private SQLCita_afiliado sqlCita_afiliado;
 	
 	//----------------------tablasEPSAndes---------------------fin
 
@@ -161,6 +162,7 @@ public class PersistenciaEPSAndes {
 		tablas.add("USUARIO");
 		tablas.add("CAMPAÑA");
 		tablas.add("ORGANIZADORcAMPAÑA");
+		tablas.add("CITA_AFILIADO");
 				
 	}
 
@@ -258,6 +260,7 @@ public class PersistenciaEPSAndes {
 		sqlUsuario = new SQLUsuario(this);
 		sqlCampaña = new SQLCampaña(this);
 		sqlOrganizadorCampaña = new SQLOrganizadorCampaña(this);
+		sqlCita_afiliado = new SQLCita_afiliado(this);
 		}
 
 	
@@ -334,6 +337,9 @@ public class PersistenciaEPSAndes {
 	public String darTablaOrganizadorCampaña()
 	{
 		 return tablas.get(23);
+	}
+	public String darTablaCita_afiliado() {
+		return tablas.get(24);
 	}
 	
 	/**
