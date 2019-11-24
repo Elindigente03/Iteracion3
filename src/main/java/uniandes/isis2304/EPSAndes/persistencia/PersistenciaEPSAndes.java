@@ -664,7 +664,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado registrarCitaAfiliado(long idCita,long idAfiliado)
+	public Afiliado registrarCitaAfiliado(long id, long idCita,long idAfiliado)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -676,7 +676,9 @@ public class PersistenciaEPSAndes {
 				throw new Exception("el afiliado no se encuentra en nuestro catalogo intente de nuevo");
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
-			return sqlCita.casignarCita(pm, idAfiliado, idCita);
+		
+			sqlCita_afiliado.adicionarCitaAfiliada(pm, id, idCita, idAfiliado);
+			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
@@ -688,7 +690,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado reservaCita(long idCita , long idAfiliado)
+	public Afiliado reservaCita(long idReserva, long idCita , long idAfiliado)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -700,7 +702,9 @@ public class PersistenciaEPSAndes {
 				throw new Exception("el afiliado no se encuentra en nuestro catalogo intente de nuevo");
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
-			return sqlCita.casignarCita(pm, idAfiliado, idCita);
+			sqlCita.cambiarEstadoCitaA(pm, idAfiliado);
+			registrarCitaAfiliado(idReserva, idCita, idAfiliado);
+			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
