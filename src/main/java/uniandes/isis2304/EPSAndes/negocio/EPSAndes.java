@@ -133,7 +133,7 @@ public class EPSAndes
 	{
 		log.info("Adicionando Afiliado: " + idU);
 		Date fecha = Date.valueOf(fechaNacimiento);
-		Afiliado user = pp.adicionarAfiliado(estadoSalud ,fecha,recetaActual,idO,idU,idE,idC);
+		Afiliado user = pp.adicionarAfiliado(estadoSalud ,fecha,recetaActual,idO,idU,idE);
 		log.info("Adicionando Medico: " + user);
 		return user;
 	}

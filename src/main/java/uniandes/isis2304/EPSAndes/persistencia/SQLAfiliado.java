@@ -30,10 +30,10 @@ public class SQLAfiliado {
 	public SQLAfiliado(PersistenciaEPSAndes pp) {
 		this.pp = pp;
 	}
-	public long adicionarAfiliado(PersistenceManager pm,long id ,String estadoSalud , Date fechaNacimiento , String recetaActual , long idOrden , long idUsuario , long idEps ,long idCita )
+	public long adicionarAfiliado(PersistenceManager pm,long id ,String estadoSalud , Date fechaNacimiento , String recetaActual , long idOrden , long idUsuario , long idEps  )
 	{
-		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaAfiliado() + "(id,estadosalud, fechanacimiento,recetaactual,idorden,idusuarioafiliado,ideps,idcita)" );
-		q.setParameters(id,estadoSalud,fechaNacimiento,recetaActual,idOrden,idUsuario , idCita,idOrden );
+		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaAfiliado() + "(id,estadosalud, fechanacimiento,recetaactual,idorden,idusuarioafiliado,ideps)" );
+		q.setParameters(id,estadoSalud,fechaNacimiento,recetaActual,idOrden,idUsuario ,idOrden );
 		 return (long) q.executeUnique();
 	}
 	public long eliminarAfiliado(PersistenceManager pm,long id )
@@ -42,12 +42,7 @@ public class SQLAfiliado {
 		q.setParameters(id);
 		 return (long) q.executeUnique();
 	}
-	public Afiliado casignarCita(PersistenceManager pm, long idAfiliado ,long idCita ) {
-		Query q = pm.newQuery(SQL, "Update" + pp.darTablaAfiliado() + "set idCita = ? where id =" + idAfiliado);
-		q.setResultClass(Orden.class);
-		q.setParameters(idCita);
-		return (Afiliado) q.executeUnique();
-	}
+
 	public Afiliado darAfiliadoPorId(PersistenceManager pm, long idAfiliado) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAfiliado() + " WHERE id = ?");
 		q.setResultClass(Afiliado.class);

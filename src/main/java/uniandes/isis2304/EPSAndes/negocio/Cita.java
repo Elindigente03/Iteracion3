@@ -7,6 +7,7 @@ public class Cita implements VOCita{
 	private long id;
 	private long cumplida;
 	private Date fecha;
+	private long idAfiliado;
 	
 	
 	
@@ -16,10 +17,17 @@ public class Cita implements VOCita{
 	 * @param cumplida
 	 * @param fecha
 	 */
-	public Cita(long id, long cumplida, Date fecha) {
+	public Cita(long id, long cumplida, Date fecha, long idAfiliado) {
 		this.id = id;
 		this.cumplida = cumplida;
 		this.fecha = fecha;
+		this.idAfiliado  = idAfiliado;
+	}
+	public long getIdAfiliado() {
+		return idAfiliado;
+	}
+	public void setIdAfiliado(long idAfiliado) {
+		this.idAfiliado = idAfiliado;
 	}
 	/**
 	 * @return the id

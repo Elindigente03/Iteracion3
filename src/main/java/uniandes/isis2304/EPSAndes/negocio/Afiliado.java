@@ -11,7 +11,7 @@ public class Afiliado  implements VOAfiliado{
 	private long idOrden;
 	private long idUsuario;
 	private long idEps;
-	private long idCita;
+	
 	
 	
 	/**
@@ -26,7 +26,7 @@ public class Afiliado  implements VOAfiliado{
 	 * @param fechaNacimiento
 	 * @param recetaActual
 	 */
-	public Afiliado(long id, String estadoSalud, Date fechaNacimiento, String recetaActual,long idOrden , long idUsuario,long idEps ,long idCita) {
+	public Afiliado(long id, String estadoSalud, Date fechaNacimiento, String recetaActual,long idOrden , long idUsuario,long idEps ) {
 		this.id = id;
 		this.estadoSalud = estadoSalud;
 		this.fechaNacimiento = fechaNacimiento;
@@ -34,7 +34,7 @@ public class Afiliado  implements VOAfiliado{
 		this.idOrden = idOrden;
 		this.idUsuario = idUsuario;
 		this.idEps = idEps;
-		this.idCita = idCita;
+		
 	}
 	
 
@@ -62,20 +62,17 @@ public class Afiliado  implements VOAfiliado{
 	}
 	public long getIdOrden() 
 	{
-		return id;
+		return idOrden;
 	}
 	public long getIdUsuario() 
 	{
-		return id;
+		return idUsuario;
 	}
 	public long getIdEps() 
 	{
-		return id;
+		return idEps;
 	}
-	public long getIdCita() 
-	{
-		return id;
-	}
+	
 	
 	
 }

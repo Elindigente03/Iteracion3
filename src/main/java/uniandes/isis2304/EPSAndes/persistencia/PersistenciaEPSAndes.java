@@ -604,21 +604,21 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado adicionarAfiliado(String estadoSalud,Date fechaNacimiento, String recetaActual ,long idO ,long idU ,long idE , long idC) {
+	public Afiliado adicionarAfiliado(String estadoSalud,Date fechaNacimiento, String recetaActual ,long idO ,long idU ,long idE) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			long idAfiliado = nextval();
 			
-			long tuplasInsertadas = sqlAfiliado.adicionarAfiliado(pm,idAfiliado, estadoSalud, fechaNacimiento, recetaActual,idO,idU,idE,idC);
+			long tuplasInsertadas = sqlAfiliado.adicionarAfiliado(pm,idAfiliado, estadoSalud, fechaNacimiento, recetaActual,idO,idU,idE);
 			tx.commit();
 			if(sqlUsuario.darUsuarioPorId(pm, idU)== null)
 			{
 				throw new Exception();
 			}
 			log.trace("Inserción de Afiliado: " + idAfiliado + ": " + tuplasInsertadas + " tuplas insertadas");
-			return new Afiliado(idAfiliado,estadoSalud,fechaNacimiento,recetaActual,idO,idU,idE,idC);
+			return new Afiliado(idAfiliado,estadoSalud,fechaNacimiento,recetaActual,idO,idU,idE);
 		} catch (Exception e) {
 			//        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
@@ -670,7 +670,7 @@ public class PersistenciaEPSAndes {
 				throw new Exception("el afiliado no se encuentra en nuestro catalogo intente de nuevo");
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
-			return sqlAfiliado.casignarCita(pm, idAfiliado, idCita);
+			return sqlCita.casignarCita(pm, idAfiliado, idCita);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
@@ -694,7 +694,7 @@ public class PersistenciaEPSAndes {
 				throw new Exception("el afiliado no se encuentra en nuestro catalogo intente de nuevo");
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
-			return sqlAfiliado.casignarCita(pm, idAfiliado, idCita);
+			return sqlCita.casignarCita(pm, idAfiliado, idCita);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
