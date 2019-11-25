@@ -457,7 +457,7 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void registrarServicioIPS ()
 	{
 		try {
@@ -493,225 +493,273 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 		}
 	}
 
-public void registrarCitaafiliado()
-{
-	//TODO falta parte del medico
-	try {
-		String idCita = JOptionPane.showInputDialog(this, "id de la Cita",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
-		String idAfiliado = JOptionPane.showInputDialog(this, "id del Afiliado",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
-
-		long idC = Long.parseLong(idCita);
-		long idA = Long.parseLong(idAfiliado);
-
-		VOAfiliado u =EPSAndes.registrarCitaAfiliado(idC, idA);
-		if(idCita != null )
-		{
-			if(u == null)
-			{
-				throw new Exception("no sepuedo insertar la cita para el afiliado con numero de registro: " + idAfiliado);
-			}
-			String resultado = "en adicionarOrden\n\n";
-			resultado += "orden adicionada exitosamente";
-			resultado += "\n operacion terminada";
-			panelDatos.actualizarInterfaz(resultado);
-		}	
-
-		else 
-		{
-			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
-		}
-
-
-	}catch (Exception e)
+	public void registrarCitaafiliado()
 	{
-		String resultado = generarMensajeError(e);
-		panelDatos.actualizarInterfaz(resultado);
-	}
-}
-public void realizarReserva()
-{
+		//TODO falta parte del medico
+		try {
+			String idCita = JOptionPane.showInputDialog(this, "id de la Cita",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
+			String idAfiliado = JOptionPane.showInputDialog(this, "id del Afiliado",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
 
-	//TODO disponibilidad
-	try {
-		String idCita = JOptionPane.showInputDialog(this, "id de la Cita",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
-		String idAfiliado = JOptionPane.showInputDialog(this, "id del Afiliado",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
+			long idC = Long.parseLong(idCita);
+			long idA = Long.parseLong(idAfiliado);
 
-		long idC = Long.parseLong(idCita);
-		long idA = Long.parseLong(idAfiliado);
-
-		VOAfiliado u =EPSAndes.realizarReserva(idA, idC);
-		if(idCita != null )
-		{
-			if(u == null)
+			VOAfiliado u =EPSAndes.registrarCitaAfiliado(idC, idA);
+			if(idCita != null )
 			{
-				throw new Exception("no sepuedo insertar la cita para el afiliado con numero de registro: " + idAfiliado);
-			}
-			String resultado = "en adicionarOrden\n\n";
-			resultado += "orden adicionada exitosamente";
-			resultado += "\n operacion terminada";
-			panelDatos.actualizarInterfaz(resultado);
-		}	
+				if(u == null)
+				{
+					throw new Exception("no sepuedo insertar la cita para el afiliado con numero de registro: " + idAfiliado);
+				}
+				String resultado = "en adicionarOrden\n\n";
+				resultado += "orden adicionada exitosamente";
+				resultado += "\n operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}	
 
-		else 
-		{
-			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
-		}
-
-
-	}catch (Exception e)
-	{
-		String resultado = generarMensajeError(e);
-		panelDatos.actualizarInterfaz(resultado);
-	}
-}
-public void registrarAsistencia()
-{
-	try {
-		String idCita = JOptionPane.showInputDialog(this, "id de la Cita",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
-
-		long idC = Long.parseLong(idCita);
-		
-
-		VOCita u =EPSAndes.registrarAsistencia(idC);
-		if(idCita != null )
-		{
-			if(u == null)
+			else 
 			{
-				throw new Exception("no sepuedo comprobar la asistencia de la cita : " + idC);
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
 			}
-			String resultado = "en adicionarOrden\n\n";
-			resultado += "orden adicionada exitosamente";
-			resultado += "\n operacion terminada";
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
-		}	
-
-		else 
-		{
-			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
 		}
-
-
-	}catch (Exception e)
-	{
-		String resultado = generarMensajeError(e);
-		panelDatos.actualizarInterfaz(resultado);
 	}
- // rf9
-}
-//rf 1 it 
-public void registrarCampaña()
-{
-	try {
-		String idOrganizador = JOptionPane.showInputDialog(this, "id del Organizador de la campaña",	"adicionar Campaña", JOptionPane.QUESTION_MESSAGE);
-		String nombreCampaña = JOptionPane.showInputDialog(this, "nombre de la campaña",	"adicionar Campaña", JOptionPane.QUESTION_MESSAGE);
+	public void realizarReserva()
+	{
 
-		LinkedList<Long> idOrden = new LinkedList<>();
-        JOptionPane.showConfirmDialog(this, "ahora va a insertar los id de lso servicios que desea agregar a la campaña si quiere terminar esta captura de datos escriba X");
-        boolean x = false;
-        while (!x)
-        {
-    		String id = JOptionPane.showInputDialog(this, "id del servicio",	"adicionar Campaña", JOptionPane.QUESTION_MESSAGE);
-    		if(id.equalsIgnoreCase("X") )
-    		{
-    		long idO = Long.parseLong(id);
-    		idOrden.add(idO);
-    		}
-    		else 
-    		{
-    		   x= true;
-    		}
-        }
-        long idOC = Long.parseLong(idOrganizador);
-		VOCampaña u =EPSAndes.registrarCampaña(idOC, nombreCampaña, idOrden);
-		if(nombreCampaña != null )
-		{
-			if(u == null)
+		//TODO disponibilidad
+		try {
+			String idCita = JOptionPane.showInputDialog(this, "id de la Cita",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
+			String idAfiliado = JOptionPane.showInputDialog(this, "id del Afiliado",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
+
+			long idC = Long.parseLong(idCita);
+			long idA = Long.parseLong(idAfiliado);
+
+			VOAfiliado u =EPSAndes.realizarReserva(idA, idC);
+			if(idCita != null )
 			{
-				throw new Exception("no sepuedo agregar la campaña : " + nombreCampaña);
-			}
-			String resultado = "en adicionarOrden\n\n";
-			resultado += "orden adicionada exitosamente";
-			resultado += "\n operacion terminada";
-			panelDatos.actualizarInterfaz(resultado);
-		}	
+				if(u == null)
+				{
+					throw new Exception("no sepuedo insertar la cita para el afiliado con numero de registro: " + idAfiliado);
+				}
+				String resultado = "en adicionarOrden\n\n";
+				resultado += "orden adicionada exitosamente";
+				resultado += "\n operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}	
 
-		else 
-		{
-			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
-		}
-
-
-	}catch (Exception e)
-	{
-		String resultado = generarMensajeError(e);
-		panelDatos.actualizarInterfaz(resultado);
-	}
-}
-public void cancelarServiciosCampaña()
-{
-	try {
-		String idCampaña = JOptionPane.showInputDialog(this, "id  de la campaña",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
-
-		String idOrganizador = JOptionPane.showInputDialog(this, "id del Organizador de la campaña",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
-		
-		String nombreCampaña = JOptionPane.showInputDialog(this, "nombre de la campaña",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
-
-		LinkedList<Long> idOrden = new LinkedList<>();
-        JOptionPane.showConfirmDialog(this, "ahora va a insertar los id de los servicios que desea cancelar a la campaña si quiere terminar esta captura de datos escriba X");
-        boolean x = false;
-        while (!x)
-        {
-    		String id = JOptionPane.showInputDialog(this, "id del servicio",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
-    		if(id.equalsIgnoreCase("X") )
-    		{
-    		long idO = Long.parseLong(id);
-    		idOrden.add(idO);
-    		}
-    		else 
-    		{
-    		   x= true;
-    		}
-        }
-        long idOC = Long.parseLong(idOrganizador);
-        long idC =Long.parseLong(idCampaña);
-		VOCampaña u =EPSAndes.cancelarServiciosCampaña(idC,idOC, nombreCampaña, idOrden);
-		if(nombreCampaña != null )
-		{
-			if(u == null)
+			else 
 			{
-				throw new Exception("no se puedieron eliminar los servicios de la campaña : " + nombreCampaña);
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
 			}
-			String resultado = "en adicionarOrden\n\n";
-			resultado += "orden adicionada exitosamente";
-			resultado += "\n operacion terminada";
-			panelDatos.actualizarInterfaz(resultado);
-		}	
 
-		else 
+
+		}catch (Exception e)
 		{
-			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
 		}
-
-
-	}catch (Exception e)
-	{
-		String resultado = generarMensajeError(e);
-		panelDatos.actualizarInterfaz(resultado);
 	}
-}
-public void deshabilitarServiciosSalud()
-{
-}
-public void habilitarServiciosSalud()
-{
-	
-}
+	public void registrarAsistencia()
+	{
+		try {
+			String idCita = JOptionPane.showInputDialog(this, "id de la Cita",	"adicionar Servicio IPS", JOptionPane.QUESTION_MESSAGE);
+
+			long idC = Long.parseLong(idCita);
+
+
+			VOCita u =EPSAndes.registrarAsistencia(idC);
+			if(idCita != null )
+			{
+				if(u == null)
+				{
+					throw new Exception("no sepuedo comprobar la asistencia de la cita : " + idC);
+				}
+				String resultado = "en adicionarOrden\n\n";
+				resultado += "orden adicionada exitosamente";
+				resultado += "\n operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}	
+
+			else 
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			}
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		// rf9
+	}
+	//rf 1 it 
+	public void registrarCampaña()
+	{
+		try {
+			String idOrganizador = JOptionPane.showInputDialog(this, "id del Organizador de la campaña",	"adicionar Campaña", JOptionPane.QUESTION_MESSAGE);
+			String nombreCampaña = JOptionPane.showInputDialog(this, "nombre de la campaña",	"adicionar Campaña", JOptionPane.QUESTION_MESSAGE);
+
+			LinkedList<Long> idOrden = new LinkedList<>();
+			JOptionPane.showConfirmDialog(this, "ahora va a insertar los id de lso servicios que desea agregar a la campaña si quiere terminar esta captura de datos escriba X");
+			boolean x = false;
+			while (!x)
+			{
+				String id = JOptionPane.showInputDialog(this, "id del servicio",	"adicionar Campaña", JOptionPane.QUESTION_MESSAGE);
+				if(id.equalsIgnoreCase("X") )
+				{
+					long idO = Long.parseLong(id);
+					idOrden.add(idO);
+				}
+				else 
+				{
+					x= true;
+				}
+			}
+			long idOC = Long.parseLong(idOrganizador);
+			VOCampaña u =EPSAndes.registrarCampaña(idOC, nombreCampaña, idOrden);
+			if(nombreCampaña != null )
+			{
+				if(u == null)
+				{
+					throw new Exception("no sepuedo agregar la campaña : " + nombreCampaña);
+				}
+				String resultado = "en adicionarOrden\n\n";
+				resultado += "orden adicionada exitosamente";
+				resultado += "\n operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}	
+
+			else 
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			}
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void cancelarServiciosCampaña()
+	{
+		try {
+			String idCampaña = JOptionPane.showInputDialog(this, "id  de la campaña",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
+			String idOrganizador = JOptionPane.showInputDialog(this, "id del Organizador de la campaña",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
+			String nombreCampaña = JOptionPane.showInputDialog(this, "nombre de la campaña",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
+
+			LinkedList<Long> idOrden = new LinkedList<>();
+			JOptionPane.showConfirmDialog(this, "ahora va a insertar los id de los servicios que desea cancelar a la campaña si quiere terminar esta captura de datos escriba X");
+			boolean x = false;
+			while (!x)
+			{
+				String id = JOptionPane.showInputDialog(this, "id del servicio",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
+				if(id.equalsIgnoreCase("X") )
+				{
+					long idO = Long.parseLong(id);
+					idOrden.add(idO);
+				}
+				else 
+				{
+					x= true;
+				}
+			}
+			long idOC = Long.parseLong(idOrganizador);
+			long idC =Long.parseLong(idCampaña);
+			VOCampaña u =EPSAndes.cancelarServiciosCampaña(idC,idOC, nombreCampaña, idOrden);
+			if(nombreCampaña != null )
+			{
+				if(u == null)
+				{
+					throw new Exception("no se puedieron eliminar los servicios de la campaña : " + nombreCampaña);
+				}
+				String resultado = "en adicionarOrden\n\n";
+				resultado += "orden adicionada exitosamente";
+				resultado += "\n operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}	
+
+			else 
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			}
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void deshabilitarServiciosSalud()
+	{
+		try {
+			String idIPS = JOptionPane.showInputDialog(this, "id del Organizador de la campaña",	"deshabilitar servicios salud", JOptionPane.QUESTION_MESSAGE);
+			String nombreCampaña = JOptionPane.showInputDialog(this, "nombre de la campaña",	"deshabilitar servicios salud", JOptionPane.QUESTION_MESSAGE);
+
+			LinkedList<Long> idOrden = new LinkedList<>();
+			JOptionPane.showConfirmDialog(this, "ahora va a insertar los id de los servicios que desea cancelar si quiere terminar esta captura de datos escriba X");
+			boolean x = false;
+			while (!x)
+			{
+				String id = JOptionPane.showInputDialog(this, "id del servicio",	"cancelar Servicios Campaña", JOptionPane.QUESTION_MESSAGE);
+				if(id.equalsIgnoreCase("X") )
+				{
+					long idO = Long.parseLong(id);
+					idOrden.add(idO);
+				}
+				else 
+				{
+					x= true;
+				}
+			}
+			long idOC = Long.parseLong(idOrganizador);
+			long idC =Long.parseLong(idCampaña);
+			VOCampaña u =EPSAndes.cancelarServiciosCampaña(idC,idOC, nombreCampaña, idOrden);
+			if(nombreCampaña != null )
+			{
+				if(u == null)
+				{
+					throw new Exception("no se puedieron eliminar los servicios de la campaña : " + nombreCampaña);
+				}
+				String resultado = "en adicionarOrden\n\n";
+				resultado += "orden adicionada exitosamente";
+				resultado += "\n operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}	
+
+			else 
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			}
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void habilitarServiciosSalud()
+	{
+
+	}
+	/*
+	 * **************************************************************** 
+	 * Métodos requeriemientos funcionales de consulta
+	 *****************************************************************/
 
 
 
 	/*
-	 * **************************************************************** Métodos
-	 * administrativos
+	 * **************************************************************** 
+	 * Métodos administrativos
 	 *****************************************************************/
 	/**
 	 * Muestra el log de Parranderos

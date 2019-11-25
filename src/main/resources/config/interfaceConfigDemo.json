@@ -61,12 +61,40 @@
 				}
 			]
 		},
-		{ "menuTitle": "BONO",
+		{ "menuTitle": "RFC",
 		  "options":
 			[
 				{
-					"label": "RF-8",
+					"label": "RFC1",
 					"event": "demoBar"
+				},
+				{
+					"label": "RFC2",
+					"event": "cancelarServiciosCampaña"
+				},
+				{
+					"label": "RFC3",
+					"event": "cancelarServiciosCampaña"
+				},
+				{
+					"label": "RFC4",
+					"event": "cancelarServiciosCampaña"
+				},
+				{
+					"label": "RFC5",
+					"event": "cancelarServiciosCampaña"
+				},
+				{
+					"label": "RFC6",
+					"event": "cancelarServiciosCampaña"
+				},
+				{
+					"label": "RFC7",
+					"event": "cancelarServiciosCampaña"
+				},
+				{
+					"label": "RFC8",
+					"event": "cancelarServiciosCampaña"
 				}
 			]
 		}				
