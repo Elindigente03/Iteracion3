@@ -665,7 +665,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado registrarCitaAfiliado(long id, long idCita,long idAfiliado, long idServicio)
+	public Afiliado registrarCitaAfiliado(long id, long idCita,long idAfiliado, long idServicio, Date dia)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -678,7 +678,7 @@ public class PersistenciaEPSAndes {
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
 		
-			sqlCita_afiliado.adicionarCitaAfiliada(pm, id, idCita, idAfiliado, idServicio);
+			sqlCita_afiliado.adicionarCitaAfiliada(pm, id, idCita, idAfiliado, idServicio, dia);
 			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
@@ -691,7 +691,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado reservaCita(long idReserva, long idCita , long idAfiliado, long idServicio)
+	public Afiliado reservaCita(long idReserva, long idCita , long idAfiliado, long idServicio, Date dia)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -704,7 +704,7 @@ public class PersistenciaEPSAndes {
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
 			sqlCita.cambiarEstadoCitaA(pm, idAfiliado);
-			registrarCitaAfiliado(idReserva, idCita, idAfiliado, idServicio);
+			registrarCitaAfiliado(idReserva, idCita, idAfiliado, idServicio, dia);
 			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();

@@ -32,10 +32,10 @@ public class SQLCita_afiliado {
 	public SQLCita_afiliado (PersistenciaEPSAndes pp) {
 		this.pp = pp;
 	}
-	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio, Date fechaInic, Date fechaFin )
+	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio, Date dia )
 	{
-		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio, fechaInic, fechaFin)" );
-		q.setParameters(id, citaId, afiliadoId, idServicio, fechaInic, fechaFin);
+		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio, dia)" );
+		q.setParameters(id, citaId, afiliadoId, idServicio, dia);
 		 return (long) q.executeUnique();
 	}
 	public long eliminarCitaAfiliada(PersistenceManager pm,long id )
