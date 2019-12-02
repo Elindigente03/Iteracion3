@@ -12,6 +12,7 @@ public class Cita_afiliado implements VOCita_afiliado{
 	}
 	private long citaId;
 	private long afiliadoId;
+	private long idServicio;
 	
 	
 public Cita_afiliado() {
@@ -21,11 +22,20 @@ public Cita_afiliado() {
 		this.afiliadoId = 0;
 	}
 	
-	public Cita_afiliado(long id, long citaId, long afiliadoId) {
+	public Cita_afiliado(long id, long citaId, long afiliadoId,long idServicio) {
 		this.id=id;
 		this.citaId = citaId;
 		this.afiliadoId = afiliadoId;
+		this.idServicio=idServicio;
 	}
+	public long getIdServicio() {
+		return idServicio;
+	}
+
+	public void setIdServicio(long idServicio) {
+		this.idServicio = idServicio;
+	}
+
 	public long getCitaId() {
 		return citaId;
 	}
