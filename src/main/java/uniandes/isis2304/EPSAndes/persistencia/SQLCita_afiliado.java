@@ -32,10 +32,10 @@ public class SQLCita_afiliado {
 	public SQLCita_afiliado (PersistenciaEPSAndes pp) {
 		this.pp = pp;
 	}
-	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio )
+	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio, Date fechaInic, Date fechaFin )
 	{
-		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio)" );
-		q.setParameters(id, citaId, afiliadoId, idServicio);
+		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio, fechaInic, fechaFin)" );
+		q.setParameters(id, citaId, afiliadoId, idServicio, fechaInic, fechaFin);
 		 return (long) q.executeUnique();
 	}
 	public long eliminarCitaAfiliada(PersistenceManager pm,long id )
@@ -56,5 +56,10 @@ public class SQLCita_afiliado {
 		Query q = pm.newQuery(SQL, "SELECT count(*) FROM "+ pp.darTablaCita_afiliado()+ " GROUP BY idServicio ORDER BY count(*)");
 		q.setResultClass(List.class);
 		return (List<Integer>) q.executeUnique();
+	}
+	public long datIdCitaPrestada(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "SELECT citaId FROM "+pp.darTablaCita_afiliado()+ " WHERE id =?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
 	}
 }

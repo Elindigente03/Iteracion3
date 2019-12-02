@@ -839,6 +839,8 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
+	//req consulta 4 (esta algo loco
+	
 	public void deshabilitarServiciosSalud()
 	{
 	}
