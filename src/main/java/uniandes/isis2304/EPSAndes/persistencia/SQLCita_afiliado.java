@@ -1,6 +1,7 @@
 package uniandes.isis2304.EPSAndes.persistencia;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -47,8 +48,13 @@ public class SQLCita_afiliado {
 	
 	public Cita_afiliado darCitaAfiliadaPorId(PersistenceManager pm, long idOrden) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCita_afiliado() + " WHERE id = ?");
-		q.setResultClass(Cita.class);
+		q.setResultClass(Cita_afiliado.class);
 		q.setParameters(idOrden);
 		return (Cita_afiliado) q.executeUnique();
 		}
+	public List<Integer> darIndicesServicios(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT count(*) FROM "+ pp.darTablaCita_afiliado()+ " GROUP BY idServicio ORDER BY count(*)");
+		q.setResultClass(List.class);
+		return (List<Integer>) q.executeUnique();
+	}
 }

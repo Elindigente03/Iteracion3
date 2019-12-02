@@ -5,6 +5,7 @@ package uniandes.isis2304.EPSAndes.persistencia;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -816,7 +817,28 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	
+	//req consulta 3
+	public List<Integer> darInidiceUsoServicios(){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			List<Integer> indicesOrdenados = sqlCita_afiliado.darIndicesServicios(pm);
+			tx.commit();
+			log.trace("Req de consulta 3: ");
+			return indicesOrdenados;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	public void deshabilitarServiciosSalud()
 	{
 	}
