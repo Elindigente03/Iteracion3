@@ -1,12 +1,14 @@
 package uniandes.isis2304.EPSAndes.persistencia;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.EPSAndes.negocio.Afiliado;
 import uniandes.isis2304.EPSAndes.negocio.Cita;
+import uniandes.isis2304.EPSAndes.negocio.Cita_afiliado;
 import uniandes.isis2304.EPSAndes.negocio.Orden;
 
 public class SQLCita_afiliado {
@@ -30,10 +32,10 @@ public class SQLCita_afiliado {
 	public SQLCita_afiliado (PersistenciaEPSAndes pp) {
 		this.pp = pp;
 	}
-	public long adicionarCita(PersistenceManager pm, long id,long citaId ,long afiliadoId )
+	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio, Date dia )
 	{
-		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId)" );
-		q.setParameters(id, citaId, afiliadoId);
+		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio, dia)" );
+		q.setParameters(id, citaId, afiliadoId, idServicio, dia);
 		 return (long) q.executeUnique();
 	}
 	public long eliminarCitaAfiliada(PersistenceManager pm,long id )
@@ -44,10 +46,32 @@ public class SQLCita_afiliado {
 	}
 	
 	
-	public Cita darCitaAfiliadaPorId(PersistenceManager pm, long idOrden) {
+	public Cita_afiliado darCitaAfiliadaPorId(PersistenceManager pm, long idOrden) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCita_afiliado() + " WHERE id = ?");
-		q.setResultClass(Cita.class);
+		q.setResultClass(Cita_afiliado.class);
 		q.setParameters(idOrden);
-		return (Cita) q.executeUnique();
+		return (Cita_afiliado) q.executeUnique();
 		}
+	public List<Integer> darIndicesServicios(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT count(*) FROM "+ pp.darTablaCita_afiliado()+ " GROUP BY idServicio ORDER BY idServicio");
+		q.setResultClass(List.class);
+		return (List<Integer>) q.executeUnique();
+	}
+	public long datIdCitaPrestada(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "SELECT citaId FROM "+pp.darTablaCita_afiliado()+ " WHERE id =?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
+	public List<Object> darServiciosDeAfiliado(PersistenceManager pm, long idAfiliado){
+		Query q = pm.newQuery(SQL, "SELECT idServicio FROM " +pp.darTablaCita_afiliado()+ " WHERE afiliadoId=?");
+		q.setResultClass(List.class);
+		q.setParameters(idAfiliado);
+		return (List<Object>) q.executeUnique();
+	}
+	public List<Object> darServiciosPorRangoFecha(PersistenceManager pm, Date fecha1, Date fecha2){
+		Query q = pm.newQuery(SQL, "SELECT isServicio FROM "+ pp.darTablaCita_afiliado()+ " WHERE dia BETWEEN ? AND ?");
+		q.setResultClass(List.class);
+		q.setParameters(fecha1,fecha2);
+		return (List<Object>) q.executeUnique();
+	}
 }

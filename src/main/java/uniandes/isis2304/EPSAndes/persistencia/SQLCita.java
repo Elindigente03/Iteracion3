@@ -43,12 +43,7 @@ public class SQLCita {
 		q.setParameters(id);
 		 return (long) q.executeUnique();
 	}
-	public Afiliado casignarCita(PersistenceManager pm, long idAfiliado ,long id ) {
-		Query q = pm.newQuery(SQL, "Update" + pp.darTablaCita() + "set idAfiliado = ? where id =" + id);
-		q.setResultClass(Orden.class);
-		q.setParameters(idAfiliado);
-		return (Afiliado) q.executeUnique();
-	}
+	
 	public Cita cambiarEstadoCitaA(PersistenceManager pm, long idUsuario) {
 		Query q = pm.newQuery(SQL, "Update" + pp.darTablaCita() + "set estado = Asistio  where id =" + idUsuario);
 		q.setResultClass(Cita.class);

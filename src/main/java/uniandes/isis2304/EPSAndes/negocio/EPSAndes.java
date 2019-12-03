@@ -144,20 +144,7 @@ public class EPSAndes
 		log.info("Adicionando Servicio: " + user);
 		return user;	
 	}
-	public Afiliado registrarCitaAfiliado(long idCita,long idAfiliado )
-	{
-		log.info("Adicionando Cita: " + idCita);
-		Afiliado user = pp.registrarCitaAfiliado(idCita ,idAfiliado);
-		log.info("Adicionando Cita: " + user);
-		return user;
-	}
-	public Afiliado realizarReserva(long asisitio,long idServicio)
-	{
-		log.info("Reservando Cita: " + idServicio);
-		Afiliado user = pp.reservaCita(asisitio , idServicio);
-		log.info("Adicionando Cita: " + user);
-		return user;
-	}
+	
 	public Cita registrarAsistencia(long idCita)
 	{
 		log.info("Reservando Cita: " + idCita);

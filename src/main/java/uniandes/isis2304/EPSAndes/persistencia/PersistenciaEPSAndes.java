@@ -5,9 +5,12 @@ package uniandes.isis2304.EPSAndes.persistencia;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
@@ -664,7 +667,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado registrarCitaAfiliado(long idCita,long idAfiliado)
+	public Afiliado registrarCitaAfiliado(long id, long idCita,long idAfiliado, long idServicio, Date dia)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -676,7 +679,9 @@ public class PersistenciaEPSAndes {
 				throw new Exception("el afiliado no se encuentra en nuestro catalogo intente de nuevo");
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
-			return sqlCita.casignarCita(pm, idAfiliado, idCita);
+		
+			sqlCita_afiliado.adicionarCitaAfiliada(pm, id, idCita, idAfiliado, idServicio, dia);
+			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
@@ -688,7 +693,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado reservaCita(long idCita , long idAfiliado)
+	public Afiliado reservaCita(long idReserva, long idCita , long idAfiliado, long idServicio, Date dia)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -700,7 +705,9 @@ public class PersistenciaEPSAndes {
 				throw new Exception("el afiliado no se encuentra en nuestro catalogo intente de nuevo");
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
-			return sqlCita.casignarCita(pm, idAfiliado, idCita);
+			sqlCita.cambiarEstadoCitaA(pm, idAfiliado);
+			registrarCitaAfiliado(idReserva, idCita, idAfiliado, idServicio, dia);
+			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
@@ -774,6 +781,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
+	
 	public Campaña cancelarServiciosCampaña(long idCampaña,long idOrganizador , String nombre ,LinkedList<Long> servicios)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -811,6 +819,182 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
+	//req consulta 3
+	public List<Integer> darInidiceUsoServicios(){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			List<Integer> indicesOrdenados = sqlCita_afiliado.darIndicesServicios(pm);
+			tx.commit();
+			log.trace("Req de consulta 3: parte 1");
+			return indicesOrdenados;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	public List<Servicio> darServicios(){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			List<Servicio> servicios = sqlServicio.darServicios(pm);
+			tx.commit();
+			log.trace("Req de consulta 3: parte 2");
+			return servicios;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	//req consulta 4 (esta algo loco
+	public ArrayList<Servicio> darServiciosPorRangoFechas(Date fecha1, Date fecha2){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			List<Object> idServicios = sqlCita_afiliado.darServiciosPorRangoFecha(pm, fecha1, fecha2);
+			ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
+			for (int i =0;i<idServicios.size();i++) {
+				listaServicios.add(sqlServicio.darServicioPorId(pm, (long) idServicios.get(i)));
+			}
+			tx.commit();
+			log.trace("Req de consulta 4: parte 1");
+			return listaServicios;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	public ArrayList<Servicio> darServiciosPorCapacidad(long capacidad1, long capacidad2){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			ArrayList<Servicio> listaServicios = sqlServicio.darServiciosPorCapacidad(pm, capacidad1, capacidad2);
+			tx.commit();
+			log.trace("Req de consulta 4: parte 2");
+			return listaServicios;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	public ArrayList<Servicio> darServiciosPorNombre(String nombre){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			ArrayList<Servicio> lista = sqlServicio.darServicioPorNombre(pm, nombre);
+			tx.commit();
+			log.trace("Req de consulta 4: parte 3");
+			return lista;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	public ArrayList<Servicio> darServiciosPorIps(long ips){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			ArrayList<Servicio> lista = sqlServicio.darServicioPorIPS(pm, ips);
+			tx.commit();
+			log.trace("Req de consulta 4: parte 4");
+			return lista;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	//req consulta 5 /ez a la vez sirve pa la 4
+	
+	public ArrayList<Servicio> darServiciosDeAfiliado(long idAfiliado){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			List<Object> idServicios = sqlCita_afiliado.darServiciosDeAfiliado(pm, idAfiliado);
+			ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
+				
+				
+			
+			for(int i=0; i<idServicios.size();i++) {
+				listaServicios.add(sqlServicio.darServicioPorId(pm,(long) idServicios.get(i)));
+			}
+					
+			tx.commit();
+			log.trace("Req de consulta 4: ");
+			return listaServicios;
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	//req consulta 6 (viajesote)
+	/*
+	 * Dada una unidad de tiempo (por ejemplo, semana o mes) y un servicio de salud10
+	 * , considerando todo el tiempo de operación de EPSAndes, indicar cuáles fueron 
+	 * las fechas de mayor demanda (mayor cantidad de servicios solicitados), las de
+	 *  mayor actividad (mayor cantidad de servicios efectivamente prestados) y también 
+	 *  las fechas de menor demanda.
+	 */
+	
 	public void deshabilitarServiciosSalud()
 	{
 	}
