@@ -6,9 +6,11 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
@@ -840,6 +842,30 @@ public class PersistenciaEPSAndes {
 		}
 	}
 	//req consulta 4 (esta algo loco
+	
+	//requ consulta 5 /ez
+	
+	public ArrayList<Servicio> darServiciosDeAfiliado(long idAfiliado){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			List<Object> idServicios = sqlCita_afiliado.darServiciosDeAfiliado(pm, idAfiliado);
+			ArrayList<Servicio> listaServicios = new ArrayList<Servicio>();
+				
+				
+			
+			for(int i=0; i<idServicios.size();i++) {
+				listaServicios.add(sqlServicio.darServicioPorId(pm,(long) idServicios.get(i)));
+			}
+					
+			tx.commit();
+		}
+		catch(Exception e) {
+			
+		}
+		return null;
+	}
 	
 	public void deshabilitarServiciosSalud()
 	{

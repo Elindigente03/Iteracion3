@@ -62,4 +62,10 @@ public class SQLCita_afiliado {
 		q.setParameters(id);
 		return (long) q.executeUnique();
 	}
+	public List<Object> darServiciosDeAfiliado(PersistenceManager pm, long idAfiliado){
+		Query q = pm.newQuery(SQL, "SELECT idServicio FROM " +pp.darTablaCita_afiliado()+ " WHERE afiliadoId=?");
+		q.setResultClass(List.class);
+		q.setParameters(idAfiliado);
+		return (List<Object>) q.executeUnique();
+	}
 }
