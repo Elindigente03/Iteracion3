@@ -1,5 +1,8 @@
 package uniandes.isis2304.EPSAndes.persistencia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -31,8 +34,22 @@ public class SQLServicio {
 	public long adicionarServicio(PersistenceManager pm,long id ,long capacidad , String nombre , long IPS)
 	{
 		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaServicio() + "(id,capacidad ,nombre ,IPS)" );
-		q.setParameters(id , capacidad , nombre ,IPS);
+		
+	q.setParameters(id , capacidad , nombre ,IPS);
 		 return (long) q.executeUnique();
+	}
+	public List<Servicio> darServicios(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT * FROM "+pp.darTablaServicio()+ " ORDER BY id");
+		q.setResultClass(List.class);
+		return (List<Servicio>) q.executeUnique();
+	}
+	public ArrayList<Servicio> darServiciosPorCapacidad(PersistenceManager pm, long capacidad1, long capacidad2){
+		
+		Query q = pm.newQuery(SQL, "SELECT * FROM "+pp.darTablaServicio()+ " WHERE capacidad BETWEEN ? AND ?");
+		q.setResultClass(ArrayList.class);
+		q.setParameters(capacidad1, capacidad2);
+		return (ArrayList<Servicio>) q.executeUnique();
+		
 	}
 	public long eliminarServicioID(PersistenceManager pm,long id )
 	{
@@ -45,6 +62,19 @@ public class SQLServicio {
 		q.setResultClass(Servicio.class);
 		q.setParameters(idServicio);
 		return (Servicio) q.executeUnique();
+	
+	}
+	public ArrayList<Servicio> darServicioPorNombre(PersistenceManager pm, String nombre) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaServicio() + " WHERE nombre = ?");
+		q.setResultClass(ArrayList.class);
+		q.setParameters(nombre);
+		return (ArrayList<Servicio>) q.executeUnique();
+	}
+	public ArrayList<Servicio> darServicioPorIPS(PersistenceManager pm, long ips) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaServicio() + " WHERE ips = ?");
+		q.setResultClass(ArrayList.class);
+		q.setParameters(ips);
+		return (ArrayList<Servicio>) q.executeUnique();
 	}
 	
 }

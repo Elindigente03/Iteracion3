@@ -53,7 +53,7 @@ public class SQLCita_afiliado {
 		return (Cita_afiliado) q.executeUnique();
 		}
 	public List<Integer> darIndicesServicios(PersistenceManager pm){
-		Query q = pm.newQuery(SQL, "SELECT count(*) FROM "+ pp.darTablaCita_afiliado()+ " GROUP BY idServicio ORDER BY count(*)");
+		Query q = pm.newQuery(SQL, "SELECT count(*) FROM "+ pp.darTablaCita_afiliado()+ " GROUP BY idServicio ORDER BY idServicio");
 		q.setResultClass(List.class);
 		return (List<Integer>) q.executeUnique();
 	}
@@ -66,6 +66,12 @@ public class SQLCita_afiliado {
 		Query q = pm.newQuery(SQL, "SELECT idServicio FROM " +pp.darTablaCita_afiliado()+ " WHERE afiliadoId=?");
 		q.setResultClass(List.class);
 		q.setParameters(idAfiliado);
+		return (List<Object>) q.executeUnique();
+	}
+	public List<Object> darServiciosPorRangoFecha(PersistenceManager pm, Date fecha1, Date fecha2){
+		Query q = pm.newQuery(SQL, "SELECT isServicio FROM "+ pp.darTablaCita_afiliado()+ " WHERE dia BETWEEN ? AND ?");
+		q.setResultClass(List.class);
+		q.setParameters(fecha1,fecha2);
 		return (List<Object>) q.executeUnique();
 	}
 }
