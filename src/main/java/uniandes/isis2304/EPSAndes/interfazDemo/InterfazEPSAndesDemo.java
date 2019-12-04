@@ -44,6 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.lf5.util.DateFormatManager;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -59,6 +60,7 @@ import uniandes.isis2304.EPSAndes.negocio.VOMedico;
 import uniandes.isis2304.EPSAndes.negocio.VOOrden;
 import uniandes.isis2304.EPSAndes.negocio.VORol;
 import uniandes.isis2304.EPSAndes.negocio.VOServicio;
+import uniandes.isis2304.EPSAndes.negocio.VOServiciosN;
 import uniandes.isis2304.EPSAndes.negocio.VOUsuario;
 import uniandes.isis2304.EPSAndes.negocio.EPSAndes;
 import uniandes.isis2304.EPSAndes.negocio.Rol;
@@ -755,7 +757,34 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 	 * Métodos requeriemientos funcionales de consulta
 	 *****************************************************************/
 
+ public void RFC1()
+ {
+	 try {
+			String fechaInicial = JOptionPane.showInputDialog(this, "fecha Inicial",	"Consulta1", JOptionPane.QUESTION_MESSAGE);
+			String fechafinal = JOptionPane.showInputDialog(this, "fecha Final",	"Consulta1", JOptionPane.QUESTION_MESSAGE);
 
+
+			long i = Long.parseLong(fechaInicial);
+			Date fi = new Date(i);
+			long f = Long.parseLong(fechaInicial);
+			Date ff = new Date(i);
+
+			
+			
+			List<VOServiciosN> citas = EPSAndes.listarCitas(fi,ff);
+			
+			listarCita(citas);
+	
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	   
+ }
+ 
 
 	/*
 	 * **************************************************************** 
@@ -930,6 +959,15 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 		String resp = "Los roles existentes son:\n";
 		int i = 1;
 		for (VORol tb : lista) {
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
+	
+	private String listarCita(List<VOServiciosN> lista) {
+		String resp = "Las Citas  existentes son:\n";
+		int i = 1;
+		for (VOServiciosN tb : lista) {
 			resp += i++ + ". " + tb.toString() + "\n";
 		}
 		return resp;

@@ -16,6 +16,7 @@ import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 import javax.swing.JOptionPane;
 
@@ -32,6 +33,7 @@ import uniandes.isis2304.EPSAndes.negocio.Medico;
 import uniandes.isis2304.EPSAndes.negocio.Orden;
 import uniandes.isis2304.EPSAndes.negocio.Rol;
 import uniandes.isis2304.EPSAndes.negocio.Servicio;
+import uniandes.isis2304.EPSAndes.negocio.ServiciosN;
 import uniandes.isis2304.EPSAndes.negocio.Usuario;
 
 
@@ -1001,6 +1003,34 @@ public class PersistenciaEPSAndes {
 	public void habilitarServiciosSalud()
 	{
 		
+	}
+	//requerimientos funcionales  consulta
+	public List<ServiciosN> darCitas(Date inicial, Date finalf)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(SQL, " SELECT  IPS.NOMBRE, COUNT(Cita.ID)\r\n" + 
+					"   FROM ("+this.darTablaIPS()+" INNER JOIN " + this.darTablaCita() +" ON IPS.ID = SERVICIO.IDIPS)  \r\n" + 
+					"  WHERE (  SERVICIO.FECHA > ? AND SERVICIO.FECHA < ?); ");
+			q.setResultClass(ServiciosN.class);
+			q.setParameters(inicial ,finalf);
+			tx.commit();
+			log.info("se devolvieron los servicios prestados" );
+			return (List<ServiciosN>) q.executeList();
+			
+		} catch (Exception e) {
+			//        	e.printStackTrace();
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return null;
 	}
 	
 	public long[] limpiarEPSAndes() {

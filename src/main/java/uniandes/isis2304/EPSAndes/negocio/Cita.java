@@ -66,5 +66,10 @@ public class Cita implements VOCita{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+	public String toString()
+	{
+		return "id:" + id + "afiliado:" + idAfiliado + "estado:" + cumplida + "fecha:" + fecha + "." ;
+		
+	}
 
 }

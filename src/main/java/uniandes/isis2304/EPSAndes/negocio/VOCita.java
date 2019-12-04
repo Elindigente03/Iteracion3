@@ -7,4 +7,6 @@ public interface VOCita {
 	public long getId();
 	public long getCumplida();
 	public Date getFecha();
+	
+	
 }

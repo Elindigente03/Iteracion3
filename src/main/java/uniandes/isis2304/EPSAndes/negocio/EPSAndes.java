@@ -100,6 +100,17 @@ public class EPSAndes
 		log.info("Generando los VO de Tipos de bebida: " + voRoles.size() + " existentes");
 		return voRoles;
 	}
+	public List<VOServiciosN> listarCitas(Date fechaI , Date fechaF )
+	{
+		log.info("Generando los VO ");
+		List<VOServiciosN> voCitas= new LinkedList<VOServiciosN>();
+		List<ServiciosN> lalista = pp.darCitas(fechaI,fechaF);
+		for (ServiciosN tb : lalista) {
+			voCitas.add(tb);
+		}
+		log.info("Generando los VO de : " + voCitas.size() + "IPS  ");
+		return voCitas;
+	}
 	public Rol darRolPorNombre(String nombre) {
 		log.info("Buscando Rol por nombre: " + nombre);
 		List<Rol> tb = pp.darRolPorNombre(nombre);
