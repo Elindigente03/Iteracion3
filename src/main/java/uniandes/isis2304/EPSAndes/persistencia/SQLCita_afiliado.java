@@ -1,5 +1,6 @@
 package uniandes.isis2304.EPSAndes.persistencia;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,11 +33,15 @@ public class SQLCita_afiliado {
 	public SQLCita_afiliado (PersistenciaEPSAndes pp) {
 		this.pp = pp;
 	}
-	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio, Date dia )
+	public long adicionarCitaAfiliada(PersistenceManager pm, long id,long citaId ,long afiliadoId, long idServicio, Date dia, int efectuado )
 	{
-		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio, dia)" );
-		q.setParameters(id, citaId, afiliadoId, idServicio, dia);
+		Query q = pm.newQuery(SQL , "INSERT INTO" + pp.darTablaCita_afiliado() + "(id, citaId, afiliadoId, idServicio, dia, efectuado)" );
+		q.setParameters(id, citaId, afiliadoId, idServicio, dia, efectuado);
 		 return (long) q.executeUnique();
+	}
+	public long cambiarEstadoAEfectuada(PersistenceManager pm, long id) {
+		//Query q = pm.newQuery()
+		return 0;
 	}
 	public long eliminarCitaAfiliada(PersistenceManager pm,long id )
 	{
@@ -62,27 +67,43 @@ public class SQLCita_afiliado {
 		q.setParameters(id);
 		return (long) q.executeUnique();
 	}
-	public List<Object> darServiciosDeAfiliado(PersistenceManager pm, long idAfiliado){
+	public ArrayList<Object> darServiciosDeAfiliado(PersistenceManager pm, long idAfiliado){
 		Query q = pm.newQuery(SQL, "SELECT idServicio FROM " +pp.darTablaCita_afiliado()+ " WHERE afiliadoId=?");
 		
 		q.setParameters(idAfiliado);
-		return (List<Object>) q.executeList();
+		return (ArrayList<Object>) q.executeList();
 	}
-	public List<Object> darServiciosPorRangoFecha(PersistenceManager pm, Date fecha1, Date fecha2){
+	public ArrayList<Object> darServiciosPorRangoFecha(PersistenceManager pm, Date fecha1, Date fecha2){
 		Query q = pm.newQuery(SQL, "SELECT isServicio FROM "+ pp.darTablaCita_afiliado()+ " WHERE dia BETWEEN ? AND ?");
 		q.setResultClass(List.class);
 		q.setParameters(fecha1,fecha2);
-		return (List<Object>) q.executeList();
+		return (ArrayList<Object>) q.executeList();
 	}
-	public List<Date> darDemandaSemanal(PersistenceManager pm){
-		Query q = pm.newQuery(SQL, "SELECT * FROM (SELECT MAX(dia)  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘IW’) ORDER BY count(*) DESC) WHERE ROWNUM <= 5");
+	public ArrayList<Date> darDemandaSemanal(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘IW’) ORDER BY conteo DESC) WHERE ROWNUM <= 5");
 		
-		return (List<Date>) q.executeList();
+		return (ArrayList<Date>) q.executeList();
 		
 	}
-	public List<Date> darDemandaMensual(PersistenceManager pm){
-		Query q = pm.newQuery(SQL, "SELECT * FROM (SELECT MAX(dia)  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘MM/YY’) ORDER BY count(*) DESC) WHERE ROWNUM <= 5");
+	public ArrayList<Date> darDemandaMensual(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘MM/YY’) ORDER BY conteo DESC) WHERE ROWNUM <= 5");
 		
-		return (List<Date>) q.executeList();
+		return (ArrayList<Date>) q.executeList();
+	}
+	public ArrayList<Date> darMenorDemandaSemanal(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘IW’) ORDER BY conteo ) WHERE ROWNUM <= 5");
+		
+		return (ArrayList<Date>) q.executeList();
+		
+	}
+	public ArrayList<Date> darMenorDemandaMensual(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘MM/YY’) ORDER BY conteo ) WHERE ROWNUM <= 5");
+		
+		return (ArrayList<Date>) q.executeList();
+	}
+	public ArrayList<Date> darMayorActividad(PersistenceManager pm){
+		Query q = pm.newQuery(SQL,"SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" WHERE efectuado=1 GROUP BY TO_CHAR(dia, ‘IW’) ORDER BY conteo DESC) WHERE ROWNUM <= 5");
+		
+		return (ArrayList<Date>) q.executeList();
 	}
 }

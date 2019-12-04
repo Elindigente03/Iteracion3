@@ -16,8 +16,25 @@ public class Cita_afiliado implements VOCita_afiliado{
 	private long afiliadoId;
 	private long idServicio;
 	private Date dia;
+	private int efactuada;
 	
 	
+public Date getDia() {
+		return dia;
+	}
+
+	public void setDia(Date dia) {
+		this.dia = dia;
+	}
+
+	public int getEfactuada() {
+		return efactuada;
+	}
+
+	public void setEfactuada(int efactuada) {
+		this.efactuada = efactuada;
+	}
+
 public Date getFechaInic() {
 		return dia;
 	}

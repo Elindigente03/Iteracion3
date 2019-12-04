@@ -18,7 +18,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
-import javax.swing.JOptionPane;
+
 
 import org.apache.log4j.Logger;
 import com.google.gson.JsonArray;
@@ -670,7 +670,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado registrarCitaAfiliado(long id, long idCita,long idAfiliado, long idServicio, Date dia)
+	public Afiliado registrarCitaAfiliado(long id, long idCita,long idAfiliado, long idServicio, Date dia, int efectuado)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -683,7 +683,7 @@ public class PersistenciaEPSAndes {
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
 		
-			sqlCita_afiliado.adicionarCitaAfiliada(pm, id, idCita, idAfiliado, idServicio, dia);
+			sqlCita_afiliado.adicionarCitaAfiliada(pm, id, idCita, idAfiliado, idServicio, dia, efectuado);
 			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
@@ -696,7 +696,7 @@ public class PersistenciaEPSAndes {
 			pm.close();
 		}
 	}
-	public Afiliado reservaCita(long idReserva, long idCita , long idAfiliado, long idServicio, Date dia)
+	public Afiliado reservaCita(long idReserva, long idCita , long idAfiliado, long idServicio, Date dia, int efectuado)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -709,7 +709,7 @@ public class PersistenciaEPSAndes {
 			}
 			log.trace("Inserción de Servicio: " + idCita + ": ");
 			sqlCita.cambiarEstadoCitaA(pm, idAfiliado);
-			registrarCitaAfiliado(idReserva, idCita, idAfiliado, idServicio, dia);
+			registrarCitaAfiliado(idReserva, idCita, idAfiliado, idServicio, dia, efectuado);
 			return sqlAfiliado.darAfiliadoPorId(pm, idAfiliado);
 		} catch (Exception e) {
 		 //        	e.printStackTrace();
@@ -998,9 +998,105 @@ public class PersistenciaEPSAndes {
 	 *  las fechas de menor demanda.
 	 */
 	//rangoTemporal: Si es 1 entonces rango semanal, si es 0 es mensual
-	public ArrayList<Integer> darFechasMayorDemanda(int rangoTemporal){
+	public ArrayList<java.util.Date> darFechasMayorDemanda(int rangoTemporal){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			ArrayList<java.util.Date> lista  = new ArrayList<java.util.Date>();
+			if(rangoTemporal==1) {
+				 lista = sqlCita_afiliado.darDemandaSemanal(pm);
+			}
+			else {
+				 lista = sqlCita_afiliado.darDemandaMensual(pm);
+			}
+			log.trace("Req de consulta 6: ");
+			return lista;
+			
+			
+			
+			
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
 		
-		return null;
+		
+		
+	}
+	public ArrayList<java.util.Date> darFechasMenorDemanda(int rangoTemporal){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			ArrayList<java.util.Date> lista  = new ArrayList<java.util.Date>();
+			if(rangoTemporal==1) {
+				 lista = sqlCita_afiliado.darMenorDemandaSemanal(pm);
+			}
+			else {
+				 lista = sqlCita_afiliado.darMenorDemandaMensual(pm);
+			}
+			log.trace("Req de consulta 6: ");
+			return lista;
+			
+			
+			
+			
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+		
+		
+	}
+	public ArrayList<java.util.Date> darFechasMayorActividad(int rangoTemporal){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			ArrayList<java.util.Date> lista  = new ArrayList<java.util.Date>();
+			if(rangoTemporal==1) {
+				 lista = sqlCita_afiliado.darMayorActividad(pm);
+				 
+			}
+			else {
+				 lista = sqlCita_afiliado.darMayorActividad(pm);
+			}
+			log.trace("Req de consulta 4: ");
+			return lista;
+			
+			
+			
+			
+		}
+		catch(Exception e) {
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+		
+		
 	}
 	
 	public void deshabilitarServiciosSalud()
