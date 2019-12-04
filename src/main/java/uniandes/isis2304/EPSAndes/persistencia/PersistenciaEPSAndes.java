@@ -35,6 +35,7 @@ import uniandes.isis2304.EPSAndes.negocio.Rol;
 import uniandes.isis2304.EPSAndes.negocio.Servicio;
 import uniandes.isis2304.EPSAndes.negocio.ServiciosN;
 import uniandes.isis2304.EPSAndes.negocio.Usuario;
+import uniandes.isis2304.EPSAndes.negocio.cantidadCItas;
 
 
 /**
@@ -1019,6 +1020,35 @@ public class PersistenciaEPSAndes {
 			tx.commit();
 			log.info("se devolvieron los servicios prestados" );
 			return (List<ServiciosN>) q.executeList();
+			
+		} catch (Exception e) {
+			//        	e.printStackTrace();
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return null;
+	}
+	public List<cantidadCItas> darCitas2(Date inicial, Date finalf)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(SQL, "  SELECT NOMBRE, COUNT(ID)\r\n" + 
+					"   FROM" + this.darTablaCita() + "\r\n" + 
+					"  WHERE (  FECHA > ? AND FECHA < ?)\r\n" + 
+					"  ORDER BY COUNT(SERVICIOS) DESC\r\n" + 
+					"  LIMIT 20; ");
+			q.setResultClass(ServiciosN.class);
+			q.setParameters(inicial ,finalf);
+			tx.commit();
+			log.info("se devolvieron los servicios prestados" );
+			return (List<cantidadCItas>) q.executeList();
 			
 		} catch (Exception e) {
 			//        	e.printStackTrace();

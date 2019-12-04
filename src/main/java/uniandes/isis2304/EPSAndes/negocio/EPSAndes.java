@@ -111,6 +111,17 @@ public class EPSAndes
 		log.info("Generando los VO de : " + voCitas.size() + "IPS  ");
 		return voCitas;
 	}
+	public List<VOCantidadCitas> listarCitas2(Date fechaI , Date fechaF )
+	{
+		log.info("Generando los VO ");
+		List<VOCantidadCitas> voCitas= new LinkedList<VOCantidadCitas>();
+		List<cantidadCItas> lalista = pp.darCitas2(fechaI,fechaF);
+		for (cantidadCItas tb : lalista) {
+			voCitas.add(tb);
+		}
+		log.info("Generando los VO de : " + voCitas.size() + "IPS  ");
+		return voCitas;
+	}
 	public Rol darRolPorNombre(String nombre) {
 		log.info("Buscando Rol por nombre: " + nombre);
 		List<Rol> tb = pp.darRolPorNombre(nombre);

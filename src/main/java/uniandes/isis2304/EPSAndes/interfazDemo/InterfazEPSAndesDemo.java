@@ -66,6 +66,7 @@ import uniandes.isis2304.EPSAndes.negocio.EPSAndes;
 import uniandes.isis2304.EPSAndes.negocio.Rol;
 import uniandes.isis2304.EPSAndes.negocio.VOAfiliado;
 import uniandes.isis2304.EPSAndes.negocio.VOCampaña;
+import uniandes.isis2304.EPSAndes.negocio.VOCantidadCitas;
 import uniandes.isis2304.EPSAndes.negocio.VOCita;
 
 /**
@@ -766,7 +767,7 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 
 			long i = Long.parseLong(fechaInicial);
 			Date fi = new Date(i);
-			long f = Long.parseLong(fechaInicial);
+			long f = Long.parseLong(fechafinal);
 			Date ff = new Date(i);
 
 			
@@ -785,7 +786,33 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 	   
  }
  
+ public void RFC2()
+ {
+	 try {
+			String fechaInicial = JOptionPane.showInputDialog(this, "fecha Inicial",	"Consulta1", JOptionPane.QUESTION_MESSAGE);
+			String fechafinal = JOptionPane.showInputDialog(this, "fecha Final",	"Consulta1", JOptionPane.QUESTION_MESSAGE);
 
+
+			long i = Long.parseLong(fechaInicial);
+			Date fi = new Date(i);
+			long f = Long.parseLong(fechafinal);
+			Date ff = new Date(i);
+
+			
+			
+			List<VOCantidadCitas> citas = EPSAndes.listarCitas2(fi,ff);
+			
+			listarCita(citas);
+	
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	   
+ }
 	/*
 	 * **************************************************************** 
 	 * Métodos administrativos
