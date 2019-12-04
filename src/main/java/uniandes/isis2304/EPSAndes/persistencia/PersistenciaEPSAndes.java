@@ -994,6 +994,11 @@ public class PersistenciaEPSAndes {
 	 *  mayor actividad (mayor cantidad de servicios efectivamente prestados) y también 
 	 *  las fechas de menor demanda.
 	 */
+	//rangoTemporal: Si es 1 entonces rango semanal, si es 0 es mensual
+	public ArrayList<Integer> darFechasMayorDemanda(int rangoTemporal){
+		
+		return null;
+	}
 	
 	public void deshabilitarServiciosSalud()
 	{

@@ -46,9 +46,9 @@ public class SQLServicio {
 	public ArrayList<Servicio> darServiciosPorCapacidad(PersistenceManager pm, long capacidad1, long capacidad2){
 		
 		Query q = pm.newQuery(SQL, "SELECT * FROM "+pp.darTablaServicio()+ " WHERE capacidad BETWEEN ? AND ?");
-		q.setResultClass(ArrayList.class);
+		
 		q.setParameters(capacidad1, capacidad2);
-		return (ArrayList<Servicio>) q.executeUnique();
+		return (ArrayList<Servicio>) q.executeList();
 		
 	}
 	public long eliminarServicioID(PersistenceManager pm,long id )
@@ -68,13 +68,13 @@ public class SQLServicio {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaServicio() + " WHERE nombre = ?");
 		q.setResultClass(ArrayList.class);
 		q.setParameters(nombre);
-		return (ArrayList<Servicio>) q.executeUnique();
+		return (ArrayList<Servicio>) q.executeList();
 	}
 	public ArrayList<Servicio> darServicioPorIPS(PersistenceManager pm, long ips) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaServicio() + " WHERE ips = ?");
 		q.setResultClass(ArrayList.class);
 		q.setParameters(ips);
-		return (ArrayList<Servicio>) q.executeUnique();
+		return (ArrayList<Servicio>) q.executeList();
 	}
 	
 }

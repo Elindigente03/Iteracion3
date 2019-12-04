@@ -48,14 +48,14 @@ public class SQLCita_afiliado {
 	
 	public Cita_afiliado darCitaAfiliadaPorId(PersistenceManager pm, long idOrden) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCita_afiliado() + " WHERE id = ?");
-		q.setResultClass(Cita_afiliado.class);
+		
 		q.setParameters(idOrden);
 		return (Cita_afiliado) q.executeUnique();
 		}
 	public List<Integer> darIndicesServicios(PersistenceManager pm){
 		Query q = pm.newQuery(SQL, "SELECT count(*) FROM "+ pp.darTablaCita_afiliado()+ " GROUP BY idServicio ORDER BY idServicio");
-		q.setResultClass(List.class);
-		return (List<Integer>) q.executeUnique();
+		
+		return (List<Integer>) q.executeList();
 	}
 	public long datIdCitaPrestada(PersistenceManager pm, long id) {
 		Query q = pm.newQuery(SQL, "SELECT citaId FROM "+pp.darTablaCita_afiliado()+ " WHERE id =?");
@@ -64,14 +64,25 @@ public class SQLCita_afiliado {
 	}
 	public List<Object> darServiciosDeAfiliado(PersistenceManager pm, long idAfiliado){
 		Query q = pm.newQuery(SQL, "SELECT idServicio FROM " +pp.darTablaCita_afiliado()+ " WHERE afiliadoId=?");
-		q.setResultClass(List.class);
+		
 		q.setParameters(idAfiliado);
-		return (List<Object>) q.executeUnique();
+		return (List<Object>) q.executeList();
 	}
 	public List<Object> darServiciosPorRangoFecha(PersistenceManager pm, Date fecha1, Date fecha2){
 		Query q = pm.newQuery(SQL, "SELECT isServicio FROM "+ pp.darTablaCita_afiliado()+ " WHERE dia BETWEEN ? AND ?");
 		q.setResultClass(List.class);
 		q.setParameters(fecha1,fecha2);
-		return (List<Object>) q.executeUnique();
+		return (List<Object>) q.executeList();
+	}
+	public List<Date> darDemandaSemanal(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT * FROM (SELECT MAX(dia)  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘IW’) ORDER BY count(*) DESC) WHERE ROWNUM <= 5");
+		
+		return (List<Date>) q.executeList();
+		
+	}
+	public List<Date> darDemandaMensual(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT * FROM (SELECT MAX(dia)  FROM "+pp.darTablaCita_afiliado()+" GROUP BY TO_CHAR(dia, ‘MM/YY’) ORDER BY count(*) DESC) WHERE ROWNUM <= 5");
+		
+		return (List<Date>) q.executeList();
 	}
 }
