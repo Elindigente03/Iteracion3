@@ -68,6 +68,8 @@ import uniandes.isis2304.EPSAndes.negocio.VOAfiliado;
 import uniandes.isis2304.EPSAndes.negocio.VOCampaña;
 import uniandes.isis2304.EPSAndes.negocio.VOCantidadCitas;
 import uniandes.isis2304.EPSAndes.negocio.VOCita;
+import uniandes.isis2304.EPSAndes.negocio.VODemanda;
+import uniandes.isis2304.EPSAndes.negocio.VOExigente;
 
 /**
  * Clase principal de la interfaz
@@ -722,19 +724,19 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 					x= true;
 				}
 			}
-			long idOC = Long.parseLong(idOrganizador);
-			long idC =Long.parseLong(idCampaña);
-			VOCampaña u =EPSAndes.cancelarServiciosCampaña(idC,idOC, nombreCampaña, idOrden);
+		//	long idOC = Long.parseLong(idOrganizador);
+		//	long idC =Long.parseLong(idCampaña);
+		//	VOCampaña u =EPSAndes.cancelarServiciosCampaña(idC,idOC, nombreCampaña, idOrden);
 			if(nombreCampaña != null )
 			{
-				if(u == null)
+				//if(u == null)
 				{
 					throw new Exception("no se puedieron eliminar los servicios de la campaña : " + nombreCampaña);
 				}
-				String resultado = "en adicionarOrden\n\n";
-				resultado += "orden adicionada exitosamente";
-				resultado += "\n operacion terminada";
-				panelDatos.actualizarInterfaz(resultado);
+			//	String resultado = "en adicionarOrden\n\n";
+			//	resultado += "orden adicionada exitosamente";
+			//	resultado += "\n operacion terminada";
+			//	panelDatos.actualizarInterfaz(resultado);
 			}	
 
 			else 
@@ -802,7 +804,42 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 			
 			List<VOCantidadCitas> citas = EPSAndes.listarCitas2(fi,ff);
 			
-			listarCita(citas);
+			listarCita2(citas);
+	
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	   
+ }
+ public void RFC7()
+ {
+	 try {
+	
+			
+			List<VOExigente> citas = EPSAndes.ListarExigentes();
+			
+			listarExigente(citas);
+	
+
+
+		}catch (Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	   
+ }
+ public void RFC8()
+ {
+	 try {
+						
+			List<VODemanda> citas = EPSAndes.listarDemanda();
+			
+			listarDemanda(citas);
 	
 
 
@@ -999,7 +1036,32 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 		}
 		return resp;
 	}
+	
+	private String listarCita2(List<VOCantidadCitas> lista) {
+		String resp = "Las Citas  existentes son:\n";
+		int i = 1;
+		for (VOCantidadCitas tb : lista) {
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
 
+	private String listarExigente(List<VOExigente> lista) {
+		String resp = "Las Citas  existentes son:\n";
+		int i = 1;
+		for (VOExigente tb : lista) {
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
+	private String listarDemanda(List<VODemanda> lista) {
+		String resp = "Las Citas  existentes son:\n";
+		int i = 1;
+		for (VODemanda tb : lista) {
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
 	/**
 	 * Genera una cadena de caracteres con la descripción de la excepcion e,
 	 * haciendo énfasis en las excepcionsde JDO
