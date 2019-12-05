@@ -74,7 +74,7 @@ public class SQLCita_afiliado {
 		return (ArrayList<Object>) q.executeList();
 	}
 	public ArrayList<Object> darServiciosPorRangoFecha(PersistenceManager pm, Date fecha1, Date fecha2){
-		Query q = pm.newQuery(SQL, "SELECT isServicio FROM "+ pp.darTablaCita_afiliado()+ " WHERE dia BETWEEN ? AND ?");
+		Query q = pm.newQuery(SQL, "SELECT idServicio FROM "+ pp.darTablaCita_afiliado()+ " WHERE dia BETWEEN ? AND ?");
 		q.setResultClass(List.class);
 		q.setParameters(fecha1,fecha2);
 		return (ArrayList<Object>) q.executeList();
@@ -101,8 +101,13 @@ public class SQLCita_afiliado {
 		
 		return (ArrayList<Date>) q.executeList();
 	}
-	public ArrayList<Date> darMayorActividad(PersistenceManager pm){
+	public ArrayList<Date> darMayorActividadSemanal(PersistenceManager pm){
 		Query q = pm.newQuery(SQL,"SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" WHERE efectuado=1 GROUP BY TO_CHAR(dia, ‘IW’) ORDER BY conteo DESC) WHERE ROWNUM <= 5");
+		
+		return (ArrayList<Date>) q.executeList();
+	}
+	public ArrayList<Date> darMayorActividadMensual(PersistenceManager pm){
+		Query q = pm.newQuery(SQL,"SELECT maximo FROM (SELECT MAX(dia) maximo, count(*) conteo  FROM "+pp.darTablaCita_afiliado()+" WHERE efectuado=1 GROUP BY TO_CHAR(dia, ‘MM/YY’) ORDER BY conteo DESC) WHERE ROWNUM <= 5");
 		
 		return (ArrayList<Date>) q.executeList();
 	}

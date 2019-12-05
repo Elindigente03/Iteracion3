@@ -1073,13 +1073,13 @@ public class PersistenciaEPSAndes {
 			tx.begin();
 			ArrayList<java.util.Date> lista  = new ArrayList<java.util.Date>();
 			if(rangoTemporal==1) {
-				 lista = sqlCita_afiliado.darMayorActividad(pm);
+				 lista = sqlCita_afiliado.darMayorActividadSemanal(pm);
 				 
 			}
 			else {
-				 lista = sqlCita_afiliado.darMayorActividad(pm);
+				 lista = sqlCita_afiliado.darMayorActividadMensual(pm);
 			}
-			log.trace("Req de consulta 4: ");
+			log.trace("Req de consulta 6: ");
 			return lista;
 			
 			
@@ -1100,7 +1100,18 @@ public class PersistenciaEPSAndes {
 		
 		
 	}
-	
+/*
+ * Se quiere conocer la información de los afiliados y el uso que han hecho de los servicios de salud disponibles.
+Los criterios de consulta son los servicios utilizados, los tipos de servicio utilizados, las fechas (o rangos de
+fecha) en los que los utilizaron, las IPS que los prestaron. Los resultados deben ser clasificados según los
+criterios deseados por quien realiza la consulta. En la clasificación debe ofrecerse la posibilidad de
+agrupamiento y ordenamiento de las respuestas según los intereses del usuario que consulta como, por
+ejemplo, por rango de fechas de nacimiento de los afiliados, por fecha y número de veces que se utilizó un
+servicio, por tipo de servicio e IPS, etc. Esta operación está disponible para el gerente de la EPS y también para
+los organizadores de campañas de salud.
+NOTA: Para respetar la privacidad de los afiliados, el gerente de la EPS tiene acceso a toda la información,
+mientras que los organizador
+ */
 	public void deshabilitarServiciosSalud()
 	{
 	}
