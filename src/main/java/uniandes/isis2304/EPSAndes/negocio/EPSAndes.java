@@ -216,6 +216,9 @@ public class EPSAndes
 	{
 		
 	}
+	public VOAfiliado realizarReserva(long idA,long idC){
+		return null;
+	}
 	/*
 	 * **************************************************************** 
 	 * Métodos para administración
@@ -233,5 +236,10 @@ public class EPSAndes
 		long[] borrrados = pp.limpiarEPSAndes();
 		log.info("Limpiando la BD de EPSAndes: Listo!");
 		return borrrados;
+	}
+
+	public VOAfiliado registrarCitaAfiliado(long idC, long idA) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
