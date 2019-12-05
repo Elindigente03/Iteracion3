@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 		tablas.add("EPSAndes_sequence");
 		tablas.add("ADMINISTRADOR");
 		tablas.add("AFILIADO");
@@ -20,27 +19,4 @@
 		tablas.add("TERAPIA");
 		tablas.add("TRABAJAN");
 		tablas.add("URGENCIA");
-=======
-		tablas.add("EPSAndes_sequence");
-		tablas.add("ADMINISTRADOR");
-		tablas.add("AFILIADO");
-		tablas.add("CITA");
-		tablas.add("CONSULTA");
-		tablas.add("CONTROL");
-		tablas.add("EPS");
-		tablas.add("EXAMEN_DIAGNOSTICO");
-		tablas.add("GERENTE");
-		tablas.add("HOSPITALIZACION");
-		tablas.add("IPS");
-		tablas.add("MEDICO");
-		tablas.add("ORDEN");
-		tablas.add("PROCEDIMIENTO_ESPECIALIZADO");
-		tablas.add("RECEPCIONISTA");
-		tablas.add("REMISION");
-		tablas.add("ROL");
-		tablas.add("SERVICIO");
-		tablas.add("TERAPIA");
-		tablas.add("TRABAJAN");
-		tablas.add("URGENCIA");
->>>>>>> Stashed changes
 		tablas.add("USUARIO");
