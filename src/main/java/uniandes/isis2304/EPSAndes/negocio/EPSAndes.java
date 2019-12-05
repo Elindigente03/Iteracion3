@@ -122,6 +122,26 @@ public class EPSAndes
 		log.info("Generando los VO de : " + voCitas.size() + "IPS  ");
 		return voCitas;
 	}
+	public List<VOExigente> ListarExigentes() {
+		log.info("Generando los VO de usuarios Exigentes");
+		List<VOExigente> voRoles= new LinkedList<VOExigente>();
+		List<Exigente> lalista = pp.darExigentes();
+		for (Exigente tb : pp.darExigentes()) {
+			voRoles.add(tb);
+		}
+		log.info("Generando los VO de Tipos de bebida: " + voRoles.size() + " existentes");
+		return voRoles;
+	}
+	public List<VODemanda> listarDemanda() {
+		log.info("Generando los VO de servicios con alta Demanda");
+		List<VODemanda> voRoles= new LinkedList<VODemanda>();
+		List<demanda> lalista = pp.darDemanda();
+		for (demanda tb : pp.darDemanda()) {
+			voRoles.add(tb);
+		}
+		log.info("Generando los VO de Tipos de bebida: " + voRoles.size() + " existentes");
+		return voRoles;
+	}
 	public Rol darRolPorNombre(String nombre) {
 		log.info("Buscando Rol por nombre: " + nombre);
 		List<Rol> tb = pp.darRolPorNombre(nombre);

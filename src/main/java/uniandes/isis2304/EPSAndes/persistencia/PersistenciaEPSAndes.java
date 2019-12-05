@@ -28,6 +28,7 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.EPSAndes.negocio.Afiliado;
 import uniandes.isis2304.EPSAndes.negocio.Campaña;
 import uniandes.isis2304.EPSAndes.negocio.Cita;
+import uniandes.isis2304.EPSAndes.negocio.Exigente;
 import uniandes.isis2304.EPSAndes.negocio.IPS;
 import uniandes.isis2304.EPSAndes.negocio.Medico;
 import uniandes.isis2304.EPSAndes.negocio.Orden;
@@ -36,6 +37,7 @@ import uniandes.isis2304.EPSAndes.negocio.Servicio;
 import uniandes.isis2304.EPSAndes.negocio.ServiciosN;
 import uniandes.isis2304.EPSAndes.negocio.Usuario;
 import uniandes.isis2304.EPSAndes.negocio.cantidadCItas;
+import uniandes.isis2304.EPSAndes.negocio.demanda;
 
 
 /**
@@ -1163,7 +1165,60 @@ public class PersistenciaEPSAndes {
 		}
 		return null;
 	}
-	
+	public List<Exigente> darExigentes()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(SQL, "select USUARIO.NOMBRE, USUARIO.ID , SERVICIO.NOMBRE ,servicio.id, count(servicioid)   \r\n" + 
+					"from (("+ darTablaUsuario() +  "iner join"+ darTablaAfiliado()  +"  on afiliado.id = usuario.id) inerr join "+ darTablaCita() +" on cita.IDUSUARIO)  \r\n" + 
+					"WHERE count(servicioid) >12  ");
+			q.setResultClass(Exigente.class);
+			tx.commit();
+			log.info("se devolvieron los servicios prestados" );
+			return (List<Exigente>) q.executeList();
+			
+		} catch (Exception e) {
+			//        	e.printStackTrace();
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return null;
+	}
+	public List<demanda> darDemanda()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(SQL, "  select servicioid   \r\n" + 
+					"from  "+ darTablaCita() +"on cita.IDUSUARIO)  \r\n" + 
+					"WHERE asistio = 1 and count(to_char(fecha,'MM/YY'))>3 \r\n" + 
+					"Group by to_char(fecha,'MM/YY') ");
+			q.setResultClass(ServiciosN.class);
+			
+			tx.commit();
+			log.info("se devolvieron los servicios prestados" );
+			return (List<demanda>) q.executeList();
+			
+		} catch (Exception e) {
+			//        	e.printStackTrace();
+			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return null;
+	}
 	public long[] limpiarEPSAndes() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
