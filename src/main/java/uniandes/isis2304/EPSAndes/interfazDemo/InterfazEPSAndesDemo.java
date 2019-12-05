@@ -508,17 +508,17 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 			long idC = Long.parseLong(idCita);
 			long idA = Long.parseLong(idAfiliado);
 
-			VOAfiliado u =EPSAndes.registrarCitaAfiliado(idC, idA);
+			//VOAfiliado u =EPSAndes.registrarCitaAfiliado(idC, idA);
 			if(idCita != null )
 			{
-				if(u == null)
+			//	if(u == null)
 				{
 					throw new Exception("no sepuedo insertar la cita para el afiliado con numero de registro: " + idAfiliado);
 				}
-				String resultado = "en adicionarOrden\n\n";
-				resultado += "orden adicionada exitosamente";
-				resultado += "\n operacion terminada";
-				panelDatos.actualizarInterfaz(resultado);
+			//	String resultado = "en adicionarOrden\n\n";
+			//	resultado += "orden adicionada exitosamente";
+			//	resultado += "\n operacion terminada";
+			//	panelDatos.actualizarInterfaz(resultado);
 			}	
 
 			else 
@@ -544,17 +544,17 @@ public class InterfazEPSAndesDemo extends JFrame implements ActionListener {
 			long idC = Long.parseLong(idCita);
 			long idA = Long.parseLong(idAfiliado);
 
-			VOAfiliado u =EPSAndes.realizarReserva(idA, idC);
+			//VOAfiliado u =EPSAndes.realizarReserva(idA, idC);
 			if(idCita != null )
 			{
-				if(u == null)
+			//	if(u == null)
 				{
 					throw new Exception("no sepuedo insertar la cita para el afiliado con numero de registro: " + idAfiliado);
 				}
-				String resultado = "en adicionarOrden\n\n";
-				resultado += "orden adicionada exitosamente";
-				resultado += "\n operacion terminada";
-				panelDatos.actualizarInterfaz(resultado);
+				//String resultado = "en adicionarOrden\n\n";
+				//resultado += "orden adicionada exitosamente";
+				//resultado += "\n operacion terminada";
+				//panelDatos.actualizarInterfaz(resultado);
 			}	
 
 			else 
